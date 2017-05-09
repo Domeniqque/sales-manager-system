@@ -2,7 +2,6 @@ const gulp = require('gulp');
 
 const sass = require('gulp-sass');
 const concat = require('gulp-concat');
-const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
 
 gulp.task('sass', function () {
@@ -11,4 +10,9 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('./public/css'));
 });
 
-gulp.task('default', ['sass']);
+gulp.task('fonts', function () {
+    return gulp.src(['node_modules/font-awesome/fonts/*'])
+        .pipe(gulp.dest('public/fonts/'))
+});
+
+gulp.task('default', ['sass', 'fonts']);
