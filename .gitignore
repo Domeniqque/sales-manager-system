@@ -1,3 +1,3 @@
-/node_mudules
-/vendor
-.idea/workspace.xml
+node_mudules/
+vendor/
+.idea/*
