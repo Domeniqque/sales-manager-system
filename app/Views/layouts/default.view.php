@@ -10,10 +10,19 @@
 </head>
 <body>
     <header>
-        <?php _include('partials._navbar'); ?>
+        <?php _include('layouts._navbar'); ?>
     </header>
+    <div class="container is-fluid">
+        <div class="columns">
+            <div class="column is-2">
+                <?php _include('layouts._horizontal-menu'); ?>
+            </div>
 
-    <?php _include($body); ?>
+            <div class="column">
+                <?php _include($body); ?>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
