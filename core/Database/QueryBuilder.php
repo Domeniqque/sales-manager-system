@@ -27,11 +27,6 @@ abstract class QueryBuilder
     }
 
     /**
-     * @return void
-     */
-    abstract function setTable();
-
-    /**
      * @return string
      */
     public function getTable() {
