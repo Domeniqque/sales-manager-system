@@ -19,7 +19,13 @@
                 <li><a href="<?= url("categories") ?>">Categorias</a></li>
             </ul>
         </li>
+        <li>
+            <a>Clientes</a>
+            <ul>
+                <li><a href="<?= url("clients") ?>">Ver Todos</a></li>
+                <li><a href="<?= url("clients/create") ?>">Novo Cientel</a></li>
+            </ul>
+        </li>
         <li><a href="<?= url("requests") ?>">Pedidos</a></li>
-        <li><a href="<?= url("clients") ?>">Clientes</a></li>
     </ul>
 </aside>

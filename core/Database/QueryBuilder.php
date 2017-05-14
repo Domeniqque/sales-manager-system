@@ -102,24 +102,25 @@ abstract class QueryBuilder
      */
     public function save($parameters = null)
     {
-        if (is_array($parameters)) {
-            $this->data = $parameters;
-        }
+        $this->data = $parameters;
 
         try {
             $statement = Transaction::get()->prepare($this->generateSqlInsert());
 
-            foreach ($this->data as $key => $value) {
-                $statement->bindParam(":{$key}", $value);
+            $bind = array();
+
+            foreach ($parameters as $key => $value) {
+                $bind[":{$key}"] = $value;
             }
 
-            $statement->execute();
+            $statement->execute($bind);
 
             Transaction::close();
 
             return true;
         } catch (\Exception $e) {
             Transaction::rollback();
+            message()->flash("error", $e->getMessage());
         }
     }
 
@@ -147,6 +148,7 @@ abstract class QueryBuilder
             return true;
         } catch (\Exception $e) {
             Transaction::rollback();
+            message()->flash("error", $e->getMessage());
         }
     }
 
@@ -167,6 +169,7 @@ abstract class QueryBuilder
             return true;
         } catch (\Exception $e) {
             Transaction::rollback();
+            message()->flash("error", $e->getMessage());
         }
     }
 
@@ -194,6 +197,20 @@ abstract class QueryBuilder
 
         return $sql;
     }
+
+    public function query($sql)
+    {
+        try {
+            $this->statement = Transaction::get()->prepare($sql);
+
+            return $this;
+        } catch (\Exception $e) {
+            Transaction::rollback();
+
+            message()->flash("error", $e->getMessage());
+        }
+    }
+
 
 
 }

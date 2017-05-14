@@ -37,17 +37,11 @@ class CategoriesRepositories
         try {
             $this->model->save($data);
 
-            $type = "success";
-            $message = "Categoria salva com sucesso!";
+            return ["type" => "success", "message" => "Categoria salva com sucesso!"];
         } catch (\Exception $e) {
-            $type = "error";
-            $message = $e->getMessage();
-        }
 
-        return [
-            "type" => $type,
-            "message" => $message
-        ];
+            return ["type" => "error", "message" => $e->getMessage()];
+        }
     }
 
     /**
@@ -59,17 +53,11 @@ class CategoriesRepositories
         try {
             $this->model->delete($data);
 
-            $type = "success";
-            $message = "Categoria excluída com sucesso!";
+            return ["type" => "success", "message" => "Categoria excluída com sucesso!"];
         } catch (\Exception $e) {
-            $type = "error";
-            $message = $e->getMessage();
-        }
 
-        return [
-            "type" => $type,
-            "message" => $message
-        ];
+            return ["type" => "error", "message" => $e->getMessage()];
+        }
     }
 
 }

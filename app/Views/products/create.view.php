@@ -23,7 +23,7 @@
                                 <div class="field">
                                     <label for="quantity" class="label">Quantidade</label>
                                     <p class="control">
-                                        <input type="number" class="input" id="quantity" step="5">
+                                        <input type="number" class="input" id="quantity" name="quantity" step="5">
                                     </p>
                                 </div>
                             </div>
@@ -34,7 +34,7 @@
                                 <div class="field">
                                     <label for="price" class="label">Preço</label>
                                     <p class="control has-icons-left">
-                                        <input type="number" class="input" id="price" step="any">
+                                        <input type="number" class="input" id="price" name="price" step="any">
                                         <span class="icon is-small is-left">R$</span>
                                     </p>
                                 </div>
@@ -44,7 +44,7 @@
                                 <div class="field">
                                     <label for="weight" class="label">Peso</label>
                                     <p class="control has-icons-right">
-                                        <input type="number" class="input" name="weight" id="weight" title="Em grama" step="100">
+                                        <input type="number" class="input" name="weight" id="weight" title="Em grama">
                                         <span class="icon is-small is-right">g</span>
                                     </p>
                                 </div>

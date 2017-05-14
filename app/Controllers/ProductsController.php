@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Repositories\ProductsRepositories;
+use Core\Request;
 
 class ProductsController
 {
@@ -38,6 +39,10 @@ class ProductsController
 
     public function store()
     {
-        dd($_POST);
+        $response = $this->repository->save(Request::all());
+
+        message()->flash($response["type"], $response["message"]);
+
+        return redirectTo("products");
     }
 }

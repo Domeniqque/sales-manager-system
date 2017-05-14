@@ -35,9 +35,11 @@ class CategoriesController
      */
     public function store()
     {
+
         $response = $this->repository->save(Request::all());
 
-        message()->flash($response["type"], $response["message"]);
+        if ($response)
+            message()->flash($response["type"], $response["message"]);
 
         return redirectTo("categories");
     }
@@ -49,7 +51,8 @@ class CategoriesController
     {
         $response = $this->repository->delete((int) Request::get('id'));
 
-        message()->flash($response["type"], $response["message"]);
+        if ($response)
+            message()->flash($response["type"], $response["message"]);
 
         redirectTo("categories");
     }
