@@ -23,9 +23,12 @@
                                 <td><?= $category->name ?></td>
                                 <td>0</td>
                                 <td>
-                            <span class="is-danger">
-                                <a href="<?= url("categories/{$category->id}/delete") ?>" class="delete is-delete-danger is-medium"></a>
-                            </span>
+                                    <form action="<?= url("categories/delete") ?>" method="post">
+                                        <input type="hidden" name="id" value="<?= $category->id ?>">
+                                        <span class="is-danger">
+                                            <button type="submit" class="delete is-delete-danger is-medium"></button>
+                                        </span>
+                                    </form>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

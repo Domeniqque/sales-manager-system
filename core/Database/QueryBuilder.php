@@ -107,14 +107,19 @@ abstract class QueryBuilder
         }
 
         try {
-            $statement = Transaction::get()->prepare(
-                $this->generateSqlInsert()
-            );
-            $statement->execute($this->data);
+            $statement = Transaction::get()->prepare($this->generateSqlInsert());
+
+            foreach ($this->data as $key => $value) {
+                $statement->bindParam(":{$key}", $value);
+            }
+
+            $statement->execute();
+
+            Transaction::close();
 
             return true;
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            Transaction::rollback();
         }
     }
 
@@ -132,14 +137,36 @@ abstract class QueryBuilder
             $statement = Transaction::get()->prepare($this->generateSqlUpdate());
 
             foreach ($this->data as $key => $value) {
-                $statement->bindParam("{$key}", $value);
+                $statement->bindParam(":{$key}", $value);
             }
 
             $statement->execute();
 
+            Transaction::close();
+
             return true;
         } catch (\Exception $e) {
-            die($e->getMessage());
+            Transaction::rollback();
+        }
+    }
+
+    /**
+     * @param $id
+     * @return bool
+     */
+    public function delete($id)
+    {
+        try {
+            $sql = "DELETE FROM {$this->getTable()} WHERE id = :id";
+            $statement = Transaction::get()->prepare($sql);
+
+            $statement->execute([":id" => $id]);
+
+            Transaction::close();
+
+            return true;
+        } catch (\Exception $e) {
+            Transaction::rollback();
         }
     }
 
@@ -147,7 +174,8 @@ abstract class QueryBuilder
      * @return string
      */
     private function generateSqlInsert() {
-        return printf("INSERT INTO %s (%s) VALUES (%s)",
+        return sprintf(
+            "INSERT INTO %s (%s) VALUES (%s)",
             $this->getTable(),
             implode(', ', array_keys($this->data)),
             ':' . implode(', :', array_keys($this->data))

@@ -4,6 +4,9 @@ namespace Core;
 
 class Route
 {
+    /**
+     * @var array
+     */
     protected $routes = [
         "GET" => [],
         "POST" => []
@@ -40,6 +43,12 @@ class Route
         $this->routes['POST'][$uri] = $controller;
     }
 
+    /**
+     * @param $uri
+     * @param string $requestType GET | POST
+     * @return mixed
+     * @throws \Exception
+     */
     public function direct($uri, $requestType)
     {
         if (array_key_exists($uri, $this->routes[$requestType])) {
@@ -51,11 +60,26 @@ class Route
         throw new \Exception('No route defined!');
     }
 
-    public function callAction($controller, $action)
+    /**
+     * @param $controller
+     * @param $action
+     * @return mixed
+     */
+    private function callAction($controller, $action)
     {
         $controller = "App\\Controllers\\{$controller}";
         $controller = new $controller;
 
         return $controller->$action();
+    }
+
+    /**
+     * @param $uri
+     * @param string $requestType GET | POST
+     * @return bool
+     */
+    public function exists($uri, $requestType = 'GET')
+    {
+        return array_key_exists($uri, $this->routes[$requestType]);
     }
 }

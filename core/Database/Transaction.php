@@ -51,7 +51,7 @@ class Transaction
      */
     public static function rollback()
     {
-        if (!self::hasActiveConnection()) {
+        if (self::hasActiveConnection()) {
             self::$connection->rollBack();
             self::$connection = null;
         }
@@ -62,7 +62,7 @@ class Transaction
      */
     public static function close()
     {
-        if (!self::hasActiveConnection()) {
+        if (self::hasActiveConnection()) {
             self::$connection->commit();
             self::$connection = null;
         }

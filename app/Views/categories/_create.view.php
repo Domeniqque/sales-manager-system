@@ -2,7 +2,7 @@
     <div class="field">
         <label for="name" class="label">Nome</label>
         <p class="control">
-            <input type="text" class="input" id="name" name="name">
+            <input type="text" class="input" id="name" name="name" required>
         </p>
     </div>
 

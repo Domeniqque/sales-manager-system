@@ -12,6 +12,7 @@
     <header>
         <?php _include('layouts._navbar'); ?>
     </header>
+
     <div class="container is-fluid">
         <div class="columns">
             <div class="column is-2">
@@ -19,6 +20,9 @@
             </div>
 
             <div class="column">
+                <section class="section is-paddingless is-message">
+                    <?php if (message()->has()) _include("notifications.messages"); ?>
+                </section>
                 <?php _include($bodyName, $data); ?>
             </div>
         </div>

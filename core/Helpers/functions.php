@@ -41,3 +41,21 @@ function priceFormat($number) {
 function url($url) {
     return "http://" . \Core\App::get('config')['app_url'] . "/" . $url;
 }
+
+function redirectTo($uri, $requestType = 'GET') {
+    if (! \Core\App::get('router')->exists($uri, $requestType)) {
+        die('Route not found!');
+    }
+
+    header("Location: " . url($uri));
+    exit;
+}
+
+function message($key = null, $value = null) {
+    $messageClass = (new \Core\Helpers\Messages);
+
+    if (is_null($key) && is_null($value)) return $messageClass;
+    if (is_null($value)) return $messageClass->get($key);
+
+    $messageClass->put($key, $value);
+}

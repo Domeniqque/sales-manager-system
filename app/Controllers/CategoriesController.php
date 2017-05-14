@@ -20,6 +20,9 @@ class CategoriesController
         $this->repository = new CategoriesRepositories;
     }
 
+    /**
+     * Require the view
+     */
     public function index()
     {
         return view("categories.index", array(
@@ -27,10 +30,27 @@ class CategoriesController
         ));
     }
 
+    /**
+     * Store a category
+     */
     public function store()
     {
-        $message = $this->repository->save(Request::all());
+        $response = $this->repository->save(Request::all());
 
-        return view('categories.index', ["message" => $message]);
+        message()->flash($response["type"], $response["message"]);
+
+        return redirectTo("categories");
+    }
+
+    /**
+     * Delete
+     */
+    public function delete()
+    {
+        $response = $this->repository->delete((int) Request::get('id'));
+
+        message()->flash($response["type"], $response["message"]);
+
+        redirectTo("categories");
     }
 }
