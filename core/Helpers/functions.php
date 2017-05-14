@@ -9,22 +9,35 @@ function dd($value, ...$others) {
     die();
 }
 
-function view($name, $layouts = 'default') {
-    $path = str_replace('.', '/', $name);
-    if (file_exists("./app/Views/{$path}.view.php")) {
-        $body = $name;
-        $page = require "./app/Views/layouts/{$layouts}.view.php";
+function view($bodyName, $data = [], $layout = 'default') {
+    $bodyName = str_replace('.', '/', $bodyName);
 
-        return $page;
+    if (!file_exists("./app/Views/{$bodyName}.view.php")) {
+        die("View {$bodyName} not found!");
     }
+
+    if (!file_exists("./app/Views/layouts/{$layout}.view.php")) {
+        die("View {$layout} not found!");
+    }
+
+    require "./app/Views/layouts/{$layout}.view.php";
 }
 
-function _include($name) {
+function _include($name, $data = null) {
     $path = str_replace('.', '/', $name);
+    if (!is_null($data)) extract($data);
     include "./app/Views/{$path}.view.php";
 }
 
 function asset($path) {
     if (file_exists("public/{$path}"))
         echo "/public/{$path}";
+}
+
+function priceFormat($number) {
+    return "R$" . str_replace(".", ',', $number);
+}
+
+function url($url) {
+    return "http://" . \Core\App::get('config')['app_url'] . "/" . $url;
 }

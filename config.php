@@ -1,5 +1,6 @@
 <?php
 return [
+    "app_url" => "localhost:8080",
     "database" => [
         "name" => "gestao_produto",
         "username" => "root",

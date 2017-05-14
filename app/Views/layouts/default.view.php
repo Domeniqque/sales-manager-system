@@ -19,10 +19,9 @@
             </div>
 
             <div class="column">
-                <?php _include($body); ?>
+                <?php _include($bodyName, $data); ?>
             </div>
         </div>
     </div>
-
 </body>
 </html>

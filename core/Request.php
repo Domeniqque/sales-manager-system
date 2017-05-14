@@ -15,4 +15,14 @@ class Request
     {
         return $_SERVER['REQUEST_METHOD'];
     }
+
+    public static function all()
+    {
+        return $_REQUEST;
+    }
+
+    public static function get($key)
+    {
+        return $_REQUEST[$key];
+    }
 }

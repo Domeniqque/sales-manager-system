@@ -1,7 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: domeniqque
- * Date: 13/05/17
- * Time: 13:46
- */
+require "Helpers/functions.php";
+
+use Core\App;
+
+App::bind('config', require "config.php");

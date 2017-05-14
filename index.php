@@ -1,8 +1,9 @@
 <?php
 
 require "./vendor/autoload.php";
-require "./core/Helpers/functions.php";
+require "./core/bootstrap.php";
+
 use Core\{Request, Route};
 
-$rotas = Route::load('app/routes.php')
-                ->direct(Request::uri(), Request::method());
+Route::load('app/routes.php')
+    ->direct(Request::uri(), Request::method());

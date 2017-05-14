@@ -12,12 +12,14 @@
     </p>
     <ul class="menu-list">
         <li>
-            <a href="/products" class="is-active">Produtos</a>
+            <a class="is-active">Produtos</a>
             <ul>
-                <li><a href="">Novo Produto</a></li>
+                <li><a href="<?= url("products") ?>">Ver Todos</a></li>
+                <li><a href="<?= url("products/create") ?>">Novo Produto</a></li>
+                <li><a href="<?= url("categories") ?>">Categorias</a></li>
             </ul>
         </li>
-        <li><a href="/requests">Pedidos</a></li>
-        <li><a href="/clients">Clientes</a></li>
+        <li><a href="<?= url("requests") ?>">Pedidos</a></li>
+        <li><a href="<?= url("clients") ?>">Clientes</a></li>
     </ul>
 </aside>

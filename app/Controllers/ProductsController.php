@@ -21,7 +21,9 @@ class ProductsController
 
     public function index()
     {
-        dd($this->repository->all());
+        return view("products.index", array(
+            'products' => $this->repository->all()
+        ));
     }
 
     /**
@@ -29,7 +31,9 @@ class ProductsController
      */
     public function create()
     {
-        return view('products.create');
+        return view('products.create', array(
+            'categories' => $this->repository->listCategories()
+        ));
     }
 
     public function store()

@@ -1,7 +1,5 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: domeniqque
- * Date: 13/05/17
- * Time: 21:06
- */
+<article class="message is-danger">
+    <div class="message-body">
+        <?= $msg ?>
+    </div>
+</article>

@@ -1,5 +1,8 @@
-<article class="message is-danger">
+<article class="message is-success">
     <div class="message-body">
-        <?= $message["error"] ?? "Ops! Aconteceu algum erro!" ?>
+        <?= $msg ?>
+        <span class="icon">
+            <strong><i class="fa fa-check"></i></strong>
+        </span>
     </div>
 </article>

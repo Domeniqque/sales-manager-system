@@ -2,6 +2,8 @@
 
 namespace Core\Database;
 
+use Core\App;
+
 class Transaction
 {
     /**
@@ -17,7 +19,7 @@ class Transaction
      */
     private static function open()
     {
-        static::$connection = Connection::make(require "../../config.php");
+        static::$connection = Connection::make(App::get("config")['database']);
         self::$connection->beginTransaction();
     }
 
