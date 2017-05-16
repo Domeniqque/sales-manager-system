@@ -2,13 +2,12 @@
 
 namespace App\Repositories;
 
-
-use App\Models\Category;
+use App\Models\Clients;
 
 class ClientsRepositories
 {
     /**
-     * @var Category
+     * @var Clients
      */
     protected $model;
 
@@ -17,7 +16,7 @@ class ClientsRepositories
      */
     public function __construct()
     {
-        $this->model = new Category;
+        $this->model = new Clients;
     }
 
     /**
@@ -31,9 +30,7 @@ class ClientsRepositories
     public function save($data)
     {
         try {
-            $this->model->save(
-                $this->format($data)
-            );
+            $this->model->save($this->format($data));
 
             return ["type" => "success", "message" => "Cliente salvo com sucesso!"];
         } catch (\Exception $e) {
@@ -50,12 +47,13 @@ class ClientsRepositories
     {
         return [
             "name" => trim((string) $data["name"]),
-            "cpf" => (float) $data["price"],
-            "endereço" => (int) $data["weight"],
-            "email" => (int) $data["quantity"],
-            "birth_date" => (int) $data["category_id"],
+            "cpf" => (string) $data["cpf"],
+            "address" => (string) $data["address"],
+            "email" => (string) $data["email"],
+            "birth_date" => \DateTime::createFromFormat("Y-m-d", $data["birth_date"])->format("Y-m-d"),
             "created_at" => date("Y-m-d H:i:s"),
-            "description" => trim((string) $data["description"]),
+            "country" => (string) $data["country"],
+            "city" => (string) $data["city"],
         ];
     }
 

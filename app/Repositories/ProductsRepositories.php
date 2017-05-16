@@ -77,4 +77,13 @@ class ProductsRepositories
         ];
     }
 
+    /**
+     * @param $id
+     * @return object
+     */
+    public function find($id)
+    {
+        return $this->model->find($id);
+    }
+
 }

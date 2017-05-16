@@ -96,9 +96,11 @@ abstract class QueryBuilder
         return $this->statement->fetchAll(\PDO::FETCH_CLASS);
     }
 
+
     /**
      * @param null $parameters
-     * @return boolean
+     * @return mixed
+     * @throws \Exception
      */
     public function save($parameters = null)
     {
@@ -117,16 +119,19 @@ abstract class QueryBuilder
 
             Transaction::close();
 
-            return true;
+            return $statement->fetch(\PDO::FETCH_CLASS);
         } catch (\Exception $e) {
             Transaction::rollback();
-            message()->flash("error", $e->getMessage());
         }
+
+        throw new \Exception($e->getMessage());
     }
+
 
     /**
      * @param null $parameters
-     * @return boolean
+     * @return bool
+     * @throws \Exception
      */
     public function update($parameters = null)
     {
@@ -148,8 +153,9 @@ abstract class QueryBuilder
             return true;
         } catch (\Exception $e) {
             Transaction::rollback();
-            message()->flash("error", $e->getMessage());
         }
+
+        throw new \Exception($e->getMessage());
     }
 
     /**
