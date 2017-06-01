@@ -20,7 +20,7 @@
                                 <div class="field">
                                     <label for="name" class="label">Nome</label>
                                     <p class="control">
-                                        <input type="text" name="name" id="name" class="input" autofocus>
+                                        <input type="text" name="name" id="name" class="input" value="<?= $product->name ?>" autofocus>
                                     </p>
                                 </div>
                             </div>
@@ -29,7 +29,7 @@
                                 <div class="field">
                                     <label for="quantity" class="label">Quantidade</label>
                                     <p class="control">
-                                        <input type="number" class="input" id="quantity" name="quantity" step="5">
+                                        <input type="number" class="input" id="quantity" name="quantity" step="5" value="<?= $product->quantity ?>" required>
                                     </p>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                                 <div class="field">
                                     <label for="price" class="label">Preço</label>
                                     <p class="control has-icons-left">
-                                        <input type="number" class="input" id="price" name="price" step="any">
+                                        <input type="number" class="input" id="price" name="price" step="any" value="<?= $product->price ?>" required>
                                         <span class="icon is-small is-left">R$</span>
                                     </p>
                                 </div>
@@ -50,7 +50,7 @@
                                 <div class="field">
                                     <label for="weight" class="label">Peso</label>
                                     <p class="control has-icons-right">
-                                        <input type="number" class="input" name="weight" id="weight" title="Em grama">
+                                        <input type="number" class="input" name="weight" id="weight" title="Em grama" value="<?= $product->weight ?>" required>
                                         <span class="icon is-small is-right">g</span>
                                     </p>
                                 </div>
@@ -61,9 +61,9 @@
                                     <label for="category" class="label">Categoria</label>
                                     <p class="control">
                                         <span class="select">
-                                            <select name="category_id" id="category">
+                                            <select name="category_id" id="category" required>
                                                 <?php foreach ($categories as $category): ?>
-                                                    <option value="<?= $category->id ?>"><?= $category->name ?></option>
+                                                    <option value="<?= $category->id ?>" <?= !($product->category_id === $category->id) ? : ' selected' ?>><?= $category->name ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </span>
@@ -76,7 +76,7 @@
                             <label for="description" class="label">Descrição</label>
                             <p class="control">
                                 <textarea name="description" id="description" cols="30" rows="10" class="textarea"
-                                          placeholder="Descreva de modo breve este produto"></textarea>
+                                          placeholder="Descreva de modo breve este produto" required><?= $product->description ?></textarea>
                             </p>
                         </div>
 

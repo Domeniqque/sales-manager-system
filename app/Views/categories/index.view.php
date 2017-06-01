@@ -6,6 +6,9 @@
     <hr>
 
     <div class="columns">
+        <div class="column is-2">
+            <?php _include('products._aside-menu'); ?>
+        </div>
         <div class="column is-6">
             <div class="card">
                 <div class="card-content">
@@ -36,8 +39,11 @@
             </div>
         </div>
 
-        <div class="column is-5">
+        <div class="column">
             <div class="card">
+                <div class="card-header">
+                    <p class="card-header-title">Cadastrar nova categoria</p>
+                </div>
                 <div class="card-content">
                     <?php _include("categories._create"); ?>
                 </div>

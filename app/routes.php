@@ -3,6 +3,8 @@
 $router->get('products', 'ProductsController@index');
 $router->get('products/create', 'ProductsController@create');
 $router->post('products', 'ProductsController@store');
+$router->get('products/edit', 'ProductsController@edit');
+$router->post('products/edit', 'ProductsController@update');
 
 
 $router->get('categories', 'CategoriesController@index');

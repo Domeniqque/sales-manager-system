@@ -78,7 +78,7 @@ abstract class QueryBuilder
                             ->prepare($sql);
         $statement->execute();
 
-        return $statement->fetchObject(__CLASS__);
+        return $statement->fetchObject();
     }
 
     /**
@@ -116,10 +116,9 @@ abstract class QueryBuilder
             }
 
             $statement->execute($bind);
-
             Transaction::close();
 
-            return $statement->fetch(\PDO::FETCH_CLASS);
+            return true;
         } catch (\Exception $e) {
             Transaction::rollback();
         }
@@ -161,6 +160,7 @@ abstract class QueryBuilder
     /**
      * @param $id
      * @return bool
+     * @throws \Exception
      */
     public function delete($id)
     {
@@ -175,8 +175,9 @@ abstract class QueryBuilder
             return true;
         } catch (\Exception $e) {
             Transaction::rollback();
-            message()->flash("error", $e->getMessage());
         }
+
+        throw new \Exception($e->getMessage());
     }
 
     /**
@@ -204,6 +205,11 @@ abstract class QueryBuilder
         return $sql;
     }
 
+    /**
+     * @param $sql
+     * @return $this
+     * @throws \Exception
+     */
     public function query($sql)
     {
         try {
@@ -212,11 +218,8 @@ abstract class QueryBuilder
             return $this;
         } catch (\Exception $e) {
             Transaction::rollback();
-
-            message()->flash("error", $e->getMessage());
         }
+
+        throw new \Exception($e->getMessage());
     }
-
-
-
 }

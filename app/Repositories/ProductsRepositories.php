@@ -79,11 +79,18 @@ class ProductsRepositories
 
     /**
      * @param $id
-     * @return object
+     * @return array|object
      */
     public function find($id)
     {
-        return $this->model->find($id);
+        try {
+            $product = $this->model->find($id);
+
+            return $product ? ["error" => false, "product" => $product]
+                : ["error" => true, "message" => "Produto não encotrado!"];
+        } catch (\Exception $e) {
+            return ["error" => true, "message" => $e->getMessage()];
+        }
     }
 
 }

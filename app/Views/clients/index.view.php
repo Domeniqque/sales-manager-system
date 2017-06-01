@@ -5,7 +5,10 @@
     </div>
 
     <div class="columns">
-        <div class="column">
+        <div class="column is-2">
+            <?php _include('clients._aside-menu'); ?>
+        </div>
+        <div class="column is-10">
             <div class="card">
                 <div class="card-content">
                     <table class="table">

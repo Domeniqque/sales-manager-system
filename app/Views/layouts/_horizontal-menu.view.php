@@ -5,7 +5,6 @@
     </p>
     <ul class="menu-list">
         <li>
-            <a href="<?= url("products") ?>">Produtos</a>
             <ul>
                 <li><a href="<?= url("products/create") ?>">Cadastrar Produto</a></li>
                 <li><a href="<?= url("categories") ?>">Categorias</a></li>

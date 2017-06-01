@@ -5,7 +5,10 @@
     </div>
 
     <div class="columns">
-        <div class="column is-8">
+        <div class="column is-2">
+            <?php _include('products._aside-menu'); ?>
+        </div>
+        <div class="column is-10">
             <div class="card">
                 <div class="card-content">
                     <table class="table">
@@ -26,7 +29,7 @@
                                 <td><?= $product->quantity ?></td>
                                 <td><?= priceFormat($product->price) ?></td>
                                 <td>
-                                    <a href="<?= url("products/{$product->id}/edit") ?>" class="button is-primary is-outlined is-small">editar</a>
+                                    <a href="<?= url("products/edit?id={$product->id}") ?>" class="button is-primary is-outlined is-small">editar</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

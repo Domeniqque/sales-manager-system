@@ -5,25 +5,29 @@
     </div>
 
     <div class="columns">
-        <div class="column is-8">
+        <div class="column is-2">
+            <?php _include('clients._aside-menu'); ?>
+        </div>
+
+        <div class="column is-10">
             <div class="card">
                 <div class="card-content">
                     <form action="<?= url("clients") ?>" method="POST">
                         <div class="columns">
-                            <div class="column is-8">
-                                <div class="field">
-                                    <label for="name" class="label">Nome</label>
-                                    <p class="control">
-                                        <input type="text" name="name" id="name" class="input" autofocus>
-                                    </p>
-                                </div>
-                            </div>
-
                             <div class="column is-4">
                                 <div class="field">
                                     <label for="cpf" class="label">CPF</label>
                                     <p class="control">
                                         <input type="text" class="input" id="cpf" name="cpf" required>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="column is-8">
+                                <div class="field">
+                                    <label for="name" class="label">Nome</label>
+                                    <p class="control">
+                                        <input type="text" name="name" id="name" class="input" autofocus>
                                     </p>
                                 </div>
                             </div>
@@ -39,7 +43,7 @@
                                 </div>
                             </div>
 
-                            <div class="column is-2">
+                            <div class="column is-3">
                                 <div class="field">
                                     <label for="city" class="label">Cidade</label>
                                     <p class="control has-icons-left">
@@ -48,7 +52,7 @@
                                 </div>
                             </div>
 
-                            <div class="column is-2">
+                            <div class="column is-3">
                                 <div class="field">
                                     <label for="country" class="label">Estado</label>
                                     <p class="control has-icons-left">

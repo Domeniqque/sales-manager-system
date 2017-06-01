@@ -45,4 +45,19 @@ class ProductsController
 
         return redirectTo("products");
     }
+
+    public function edit()
+    {
+        $response = $this->repository->find(Request::get('id'));
+
+        if ($response["error"]) {
+            message()->flash($response["type"], $response["message"]);
+            redirectTo("products");
+        }
+
+        return view('products.edit', array(
+            'product' => $response['product'],
+            'categories' => $this->repository->listCategories()
+        ));
+    }
 }
