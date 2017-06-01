@@ -1,6 +1,8 @@
 <?php
 namespace Core\Database;
 
+use Core\Contracts\Models;
+
 abstract class QueryBuilder
 {
     /**
@@ -78,7 +80,7 @@ abstract class QueryBuilder
                             ->prepare($sql);
         $statement->execute();
 
-        return $statement->fetchObject();
+        return $statement->fetch();
     }
 
     /**

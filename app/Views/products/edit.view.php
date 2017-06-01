@@ -3,7 +3,7 @@
         <h1 class="title">Produtos</h1>
         <hr>
     </div>
-
+<?php  dd($product);?>
     <div class="columns">
         <div class="column is-2">
             <?php _include('products._aside-menu'); ?>

@@ -50,7 +50,7 @@ class ProductsController
     {
         $response = $this->repository->find(Request::get('id'));
 
-        if ($response["error"]) {
+        if ($response["type"] === "error") {
             message()->flash($response["type"], $response["message"]);
             redirectTo("products");
         }

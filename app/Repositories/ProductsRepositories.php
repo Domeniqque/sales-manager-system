@@ -86,10 +86,10 @@ class ProductsRepositories
         try {
             $product = $this->model->find($id);
 
-            return $product ? ["error" => false, "product" => $product]
-                : ["error" => true, "message" => "Produto não encotrado!"];
+            return $product ? ["type" => "success", "product" => $product]
+                : ["type" => "error", "message" => "Produto não encotrado!"];
         } catch (\Exception $e) {
-            return ["error" => true, "message" => $e->getMessage()];
+            return ["type" => "error", "message" => $e->getMessage()];
         }
     }
 
