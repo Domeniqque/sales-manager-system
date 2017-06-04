@@ -2,12 +2,12 @@
 
 namespace App\Repositories;
 
-use App\Models\Clients;
+use App\Models\Client;
 
-class ClientsRepositories
+class ClientsRepository
 {
     /**
-     * @var Clients
+     * @var Client
      */
     protected $model;
 
@@ -16,7 +16,7 @@ class ClientsRepositories
      */
     public function __construct()
     {
-        $this->model = new Clients;
+        $this->model = new Client;
     }
 
     /**
@@ -55,6 +55,15 @@ class ClientsRepositories
             "country" => (string) $data["country"],
             "city" => (string) $data["city"],
         ];
+    }
+
+    /**
+     * @param $id
+     * @return object
+     */
+    public function find($id)
+    {
+        return $this->model->find($id);
     }
 
 }

@@ -3,7 +3,7 @@
         <h1 class="title">Produtos</h1>
         <hr>
     </div>
-<?php  dd($product);?>
+
     <div class="columns">
         <div class="column is-2">
             <?php _include('products._aside-menu'); ?>
@@ -11,10 +11,13 @@
         <div class="column is-10">
             <div class="card">
                 <div class="card-header">
-                    <p class="card-header-title">Cadastrar novo produto</p>
+                    <p class="card-header-title">Editar produto</p>
                 </div>
                 <div class="card-content">
-                    <form action="<?= url("products") ?>" method="POST">
+                    <form action="<?= url("products/edit") ?>" method="POST">
+
+                        <input type="hidden" name="product_id" value="<?= $product->id ?>">
+
                         <div class="columns">
                             <div class="column is-9">
                                 <div class="field">
@@ -29,7 +32,7 @@
                                 <div class="field">
                                     <label for="quantity" class="label">Quantidade</label>
                                     <p class="control">
-                                        <input type="number" class="input" id="quantity" name="quantity" step="5" value="<?= $product->quantity ?>" required>
+                                        <input type="number" class="input" id="quantity" name="quantity" step="1" value="<?= $product->quantity ?>" required>
                                     </p>
                                 </div>
                             </div>
@@ -62,9 +65,9 @@
                                     <p class="control">
                                         <span class="select">
                                             <select name="category_id" id="category" required>
-                                                <?php foreach ($categories as $category): ?>
-                                                    <option value="<?= $category->id ?>" <?= !($product->category_id === $category->id) ? : ' selected' ?>><?= $category->name ?></option>
-                                                <?php endforeach; ?>
+                                            <?php foreach ($categories as $category): ?>
+                                                <option value="<?= $category->id ?>" <?= !($product->category_id === $category->id) ? : ' selected' ?>><?= $category->name ?></option>
+                                            <?php endforeach; ?>
                                             </select>
                                         </span>
                                     </p>

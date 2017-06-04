@@ -5,7 +5,7 @@ namespace App\Repositories;
 
 use App\Models\Product;
 
-class ProductsRepositories
+class ProductsRepository
 {
     /**
      * @var Product
@@ -13,7 +13,7 @@ class ProductsRepositories
     protected $model;
 
     /**
-     * @var CategoriesRepositories
+     * @var CategoriesRepository
      */
     protected $categoriesRepository;
 
@@ -23,7 +23,7 @@ class ProductsRepositories
     public function __construct()
     {
         $this->model = new Product;
-        $this->categoriesRepository = new CategoriesRepositories;
+        $this->categoriesRepository = new CategoriesRepository;
     }
 
     /**
@@ -32,6 +32,11 @@ class ProductsRepositories
     public function all()
     {
         return $this->model->select(['*'])->get();
+    }
+
+    public function list()
+    {
+        return $this->model->select(["id, CONCAT(name, ' - R$', price) AS name"])->get();
     }
 
     /**
@@ -44,7 +49,7 @@ class ProductsRepositories
 
     /**
      * @param $data
-     * @return array
+     * @return object
      */
     public function save($data)
     {
@@ -53,10 +58,22 @@ class ProductsRepositories
                 $this->format($data)
             );
 
-            return ["type" => "success", "message" => "Produto salvo com sucesso!"];
+            return (object) ["type" => "success", "message" => "Produto salvo com sucesso!"];
         } catch (\Exception $e) {
 
-            return ["type" => "error", "message" => $e->getMessage()];
+            return (object) ["type" => "error", "message" => $e->getMessage()];
+        }
+    }
+
+    public function update($id, $data)
+    {
+        try {
+            $this->model->update($id, $this->format($data));
+
+            return (object) ["type" => "success", "message" => "Alterações salvas com sucesso!"];
+        } catch (\Exception $e) {
+
+            return (object)["type" => "error", "message" => $e->getMessage()];
         }
     }
 
@@ -68,28 +85,26 @@ class ProductsRepositories
     {
         return [
             "name" => trim((string) $data["name"]),
-            "price" => (float) $data["price"],
+            "price" => floatval($data["price"]),
             "weight" => (int) $data["weight"],
             "quantity" => (int) $data["quantity"],
             "category_id" => (int) $data["category_id"],
-            "created_at" => date("Y-m-d H:i:s"),
             "description" => trim((string) $data["description"]),
         ];
     }
 
     /**
      * @param $id
-     * @return array|object
+     * @return object
      */
     public function find($id)
     {
         try {
-            $product = $this->model->find($id);
+            return $this->model->find($id)
+                ?? (object) ["type" => "error", "message" => "Produto não encotrado!"];
 
-            return $product ? ["type" => "success", "product" => $product]
-                : ["type" => "error", "message" => "Produto não encotrado!"];
         } catch (\Exception $e) {
-            return ["type" => "error", "message" => $e->getMessage()];
+            return (object) ["type" => "error", "message" => $e->getMessage()];
         }
     }
 

@@ -1,8 +1,6 @@
 <?php
 namespace Core\Database;
 
-use Core\Contracts\Models;
-
 abstract class QueryBuilder
 {
     /**
@@ -47,10 +45,19 @@ abstract class QueryBuilder
     /**
      * @param $prop
      * @return mixed
+     * @throws \Exception
      */
     public function __get($prop)
     {
-        return $this->data[$prop];
+        if (array_key_exists($prop, $this->data)) {
+            return $this->data[$prop];
+        }
+
+        if (method_exists($this, $prop)) {
+            return $this->$prop();
+        }
+
+        throw new \Exception("Property or method does not exists!");
     }
 
     /**
@@ -80,7 +87,7 @@ abstract class QueryBuilder
                             ->prepare($sql);
         $statement->execute();
 
-        return $statement->fetch();
+        return $statement->fetchObject(get_class($this));
     }
 
     /**
@@ -118,9 +125,12 @@ abstract class QueryBuilder
             }
 
             $statement->execute($bind);
+
+            $id = Transaction::get()->lastInsertId();
+
             Transaction::close();
 
-            return true;
+            return $this->find($id);
         } catch (\Exception $e) {
             Transaction::rollback();
         }
@@ -130,24 +140,26 @@ abstract class QueryBuilder
 
 
     /**
+     * @param $id
      * @param null $parameters
      * @return bool
      * @throws \Exception
      */
-    public function update($parameters = null)
+    public function update($id, $parameters = null)
     {
-        if (is_array($parameters)) {
+        if (is_array($parameters))
             $this->data = $parameters;
-        }
 
         try {
-            $statement = Transaction::get()->prepare($this->generateSqlUpdate());
+            $statement = Transaction::get()->prepare($this->generateSqlUpdate($id));
 
-            foreach ($this->data as $key => $value) {
-                $statement->bindParam(":{$key}", $value);
+            $bind = array();
+
+            foreach ($parameters as $key => $value) {
+                $bind[":{$key}"] = $value;
             }
 
-            $statement->execute();
+            $statement->execute($bind);
 
             Transaction::close();
 
@@ -161,12 +173,16 @@ abstract class QueryBuilder
 
     /**
      * @param $id
-     * @return bool
+     * @return object
      * @throws \Exception
      */
-    public function delete($id)
+    public function delete($id = null)
     {
+        if (is_null($id)) $id = $this->id;
+
         try {
+            $object = $this->find($id);
+
             $sql = "DELETE FROM {$this->getTable()} WHERE id = :id";
             $statement = Transaction::get()->prepare($sql);
 
@@ -174,7 +190,7 @@ abstract class QueryBuilder
 
             Transaction::close();
 
-            return true;
+            return $object;
         } catch (\Exception $e) {
             Transaction::rollback();
         }
@@ -195,16 +211,16 @@ abstract class QueryBuilder
     }
 
     /**
+     * @param $id
      * @return string
      */
-    private function generateSqlUpdate() {
+    private function generateSqlUpdate($id) {
         $sql = "UPDATE {$this->getTable()} SET";
 
-        foreach ($this->data as $key => $value) {
+        foreach ($this->data as $key => $value)
             $sql .= " {$key}=:{$key},";
-        }
 
-        return $sql;
+        return rtrim($sql, ',') . " WHERE id = $id;";
     }
 
     /**
@@ -224,4 +240,5 @@ abstract class QueryBuilder
 
         throw new \Exception($e->getMessage());
     }
+
 }

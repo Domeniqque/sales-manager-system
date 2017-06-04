@@ -2,13 +2,13 @@
 
 namespace App\Controllers;
 
-use App\Repositories\ProductsRepositories;
+use App\Repositories\ProductsRepository;
 use Core\Request;
 
 class ProductsController
 {
     /**
-     * @var ProductsRepositories
+     * @var ProductsRepository
      */
     protected $repository;
 
@@ -17,7 +17,7 @@ class ProductsController
      */
     public function __construct()
     {
-        $this->repository = new ProductsRepositories;
+        $this->repository = new ProductsRepository;
     }
 
     public function index()
@@ -41,7 +41,7 @@ class ProductsController
     {
         $response = $this->repository->save(Request::all());
 
-        message()->flash($response["type"], $response["message"]);
+        message()->flash($response->type, $response->message);
 
         return redirectTo("products");
     }
@@ -50,14 +50,26 @@ class ProductsController
     {
         $response = $this->repository->find(Request::get('id'));
 
-        if ($response["type"] === "error") {
-            message()->flash($response["type"], $response["message"]);
+        if (isset($response->type) && $response->type === "error") {
+            message()->flash($response->type, $response->message);
             redirectTo("products");
         }
 
         return view('products.edit', array(
-            'product' => $response['product'],
+            'product' => $response,
             'categories' => $this->repository->listCategories()
         ));
+    }
+
+    public function update()
+    {
+        $response = $this->repository->update(
+            Request::get('product_id'),
+            Request::all()
+        );
+
+        message()->flash($response->type, $response->message);
+
+        return redirectTo("products");
     }
 }

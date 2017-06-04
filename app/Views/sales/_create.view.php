@@ -1,4 +1,4 @@
-<form action="<?= url("requests") ?>" method="POST">
+<form action="<?= url("sales") ?>" method="POST">
     <div class="field">
         <label for="client_id" class="label">Cliente</label>
         <p class="control">

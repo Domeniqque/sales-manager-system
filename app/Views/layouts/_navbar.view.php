@@ -6,7 +6,7 @@
             </a>
             <a class="nav-item is-tab is-hidden-mobile is-active" href="<?= url("products") ?>">Produtos</a>
             <a class="nav-item is-tab is-hidden-mobile" href="<?= url("clients") ?>">Clientes</a>
-            <a class="nav-item is-tab is-hidden-mobile" href="<?= url("requests") ?>">Pedidos</a>
+            <a class="nav-item is-tab is-hidden-mobile" href="<?= url("sales") ?>">Vendas</a>
             <a class="nav-item is-tab is-hidden-mobile">About</a>
         </div>
 

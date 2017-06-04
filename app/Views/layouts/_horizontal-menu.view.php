@@ -17,9 +17,9 @@
             </ul>
         </li>
         <li>
-            <a href="<?= url("requests") ?>">Pedidos</a>
+            <a href="<?= url("sales") ?>">Pedidos</a>
             <ul>
-                <li><a href="<?= url("requests/create") ?>">Novo Pedido</a></li>
+                <li><a href="<?= url("sales/create") ?>">Novo Pedido</a></li>
             </ul>
         </li>
     </ul>

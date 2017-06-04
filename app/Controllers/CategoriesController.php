@@ -2,13 +2,13 @@
 
 namespace App\Controllers;
 
-use App\Repositories\CategoriesRepositories;
+use App\Repositories\CategoriesRepository;
 use Core\Request;
 
 class CategoriesController
 {
     /**
-     * @var CategoriesRepositories
+     * @var CategoriesRepository
      */
     protected $repository;
 
@@ -17,7 +17,7 @@ class CategoriesController
      */
     public function __construct()
     {
-        $this->repository = new CategoriesRepositories;
+        $this->repository = new CategoriesRepository;
     }
 
     /**

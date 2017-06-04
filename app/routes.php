@@ -17,7 +17,10 @@ $router->get('clients/create', 'ClientsController@create');
 $router->post('clients', 'ClientsController@store');
 $router->post('clients/delete', 'ClientsController@delete');
 
-$router->get('requests', 'RequestsController@index');
-$router->post('requests', 'RequestsController@createCart');
-$router->get('requests/create', 'RequestsController@create');
-$router->get('requests/cart', 'RequestsController@cart');
+$router->get('sales', 'SalesController@index');
+$router->post('sales', 'SalesController@createCart');
+$router->get('sales/cart', 'SalesController@cart');
+$router->post('sales/items/add', 'SalesController@addItem');
+$router->post('sales/items/remove', 'SalesController@removeItem');
+$router->post('sales/save', 'SalesController@save');
+$router->post('sales/store', 'SalesController@store');

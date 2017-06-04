@@ -1,12 +1,16 @@
 <section class="section">
     <div class="heading">
-        <h1 class="title">Pedidos</h1>
+        <h1 class="title">Vendas</h1>
     </div>
 
     <hr>
 
     <div class="columns">
-        <div class="column is-7">
+        <div class="column is-2">
+            <?php _include("sales._aside-menu"); ?>
+        </div>
+
+        <div class="column is-6">
             <div class="card">
                 <div class="card-content">
                     <table class="table">
@@ -21,7 +25,7 @@
                             <tr>
                                 <td><?= $request->name ?></td>
                                 <td>
-                                    <form action="<?= url("requests/delete") ?>" method="post">
+                                    <form action="<?= url("sales/delete") ?>" method="post">
                                         <input type="hidden" name="id" value="<?= $request->id ?>">
                                         <span class="is-danger">
                                             <button type="submit" class="delete is-delete-danger is-medium"></button>
@@ -36,16 +40,19 @@
             </div>
         </div>
 
-        <div class="column is-5">
+        <div class="column is-4">
             <div class="card">
+                <div class="card-header">
+                    <p class="card-header-title">Nova Venda</p>
+                </div>
                 <div class="card-content">
-                    <form action="<?= url("requests") ?>" method="POST">
+                    <form action="<?= url("sales") ?>" method="POST">
                         <div class="field">
                             <label for="client_id" class="label">Cliente</label>
                             <p class="control">
                                 <span class="select">
                                     <select name="client_id" id="client_id" required>
-                                        <option>Selecione um cliente</option>
+                                        <option value="">Selecione</option>
                                         <?php foreach ($clients as $client): ?>
                                             <option value="<?= $client->id ?>"><?= $client->name ?></option>
                                         <?php endforeach; ?>
@@ -55,7 +62,7 @@
                         </div>
 
                         <div class="is-grouped">
-                            <button type="submit" class="button is-primary">Salvar</button>
+                            <button type="submit" class="button is-primary">Continuar</button>
                             <button type="reset" class="button is-link">cancelar</button>
                         </div>
                     </form>

@@ -2,13 +2,13 @@
 
 namespace App\Controllers;
 
-use App\Repositories\ClientsRepositories;
+use App\Repositories\ClientsRepository;
 use Core\Request;
 
 class ClientsController
 {
     /**
-     * @var ClientsRepositories
+     * @var ClientsRepository
      */
     protected $repository;
 
@@ -17,7 +17,7 @@ class ClientsController
      */
     public function __construct()
     {
-        $this->repository = new ClientsRepositories;
+        $this->repository = new ClientsRepository;
     }
 
     /**

@@ -42,12 +42,14 @@ function url($url) {
     return "http://" . \Core\App::get('config')['app_url'] . "/" . $url;
 }
 
-function redirectTo($uri, $requestType = 'GET') {
+function redirectTo($uri, $parameters = [], $requestType = 'GET') {
     if (! \Core\App::get('router')->exists($uri, $requestType)) {
         die('Route not found!');
     }
 
-    header("Location: " . url($uri));
+    $query = empty($parameters) ? '' : "?" . http_build_query($parameters);
+
+    header("Location: " . url($uri.$query));
     exit;
 }
 

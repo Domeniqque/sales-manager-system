@@ -5,7 +5,7 @@ namespace App\Repositories;
 
 use App\Models\Category;
 
-class CategoriesRepositories
+class CategoriesRepository
 {
     /**
      * @var Category
