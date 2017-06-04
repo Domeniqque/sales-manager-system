@@ -8,8 +8,11 @@ class Product extends Models
 {
     protected $table = 'products';
 
+    /**
+     * @return mixed
+     */
     public function category()
     {
-        return $this->hasOne(Category::class, 'category_id');
+        return $this->belongsTo(Category::class, 'id', 'category_id');
     }
 }
