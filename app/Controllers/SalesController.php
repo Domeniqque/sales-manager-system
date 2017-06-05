@@ -20,9 +20,7 @@ class SalesController
 
     public function index()
     {
-        return view("sales.index", array(
-            'clients' => (new ClientsRepository)->all(),
-        ));
+        return view("sales.index", $this->saleService->getSalesClientsAndDashBoard());
     }
 
     /**
@@ -68,7 +66,12 @@ class SalesController
         ));
     }
 
-    public function save()
+    public function checkout()
+    {
+
+    }
+
+    public function keep()
     {
 
     }

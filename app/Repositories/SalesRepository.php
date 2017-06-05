@@ -43,5 +43,11 @@ class SalesRepository
         return $this->model->find($id);
     }
 
+    public function getSalesInMonth($month)
+    {
+        //refactor select method
+        return $this->model->select()->get();
+    }
+
 
 }

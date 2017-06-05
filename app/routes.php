@@ -22,5 +22,5 @@ $router->post('sales', 'SalesController@createCart');
 $router->get('sales/cart', 'SalesController@cart');
 $router->post('sales/items/add', 'SalesController@addItem');
 $router->post('sales/items/remove', 'SalesController@removeItem');
-$router->post('sales/save', 'SalesController@save');
-$router->post('sales/store', 'SalesController@store');
+$router->post('sales/keep', 'SalesController@keep');
+$router->post('sales/checkout', 'SalesController@checkout');

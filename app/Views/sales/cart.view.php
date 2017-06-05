@@ -51,22 +51,14 @@
                                     </p>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="field is-grouped">
-                            <p class="control">
-                                <button type="submit" class="button is-primary">Adicionar produto</button>
-                            </p>
-
-                            <p class="control">
-                                <a href="<?= url("sales/save") ?>" class="button">
-                                    Guardar venda
-                                </a>
-                            </p>
-
-                            <p class="control">
-                                <a href="" class="button is-link">Cancelar</a>
-                            </p>
+                            <div class="column is-2">
+                                <div class="field" style="margin-top: 32px;">
+                                    <p class="control">
+                                        <button type="submit" class="button is-primary">Adicionar produto</button>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -128,6 +120,12 @@
                             </tr>
                         </thead>
                     </table>
+                </div>
+
+                <div class="card-footer">
+                    <a href="<?= url("sales/checkout?sale={$sale->id}") ?>" class="card-footer-item ">Finalizar venda</a>
+                    <a href="<?= url("sales/save?sale={$sale->id}") ?>" class="card-footer-item">Guardar venda</a>
+                    <a href="<?= url("sales/cancel?sale={$sale->id}") ?>" class="card-footer-item">Cancelar</a>
                 </div>
             </div>
         </div>

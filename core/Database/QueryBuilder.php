@@ -102,7 +102,12 @@ abstract class QueryBuilder
 
         $this->statement->execute();
 
-        return $this->statement->fetchAll(\PDO::FETCH_CLASS);
+        $objects = [];
+
+        while ($object = $this->statement->fetchObject(get_class($this)))
+            $objects[] = $object;
+
+        return $objects;
     }
 
 

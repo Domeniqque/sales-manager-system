@@ -40,6 +40,15 @@ class SaleService
         $this->clientsRepository = new ClientsRepository;
     }
 
+    public function getSalesClientsAndDashBoard()
+    {
+        $clients = $this->clientsRepository->all();
+        $sales = $this->salesRepository->all();
+        $panel["sales_in_month"] = $this->salesRepository->getSalesInMonth((new \DateTime())->format('m'));
+
+        return compact("clients", "sales");
+    }
+
     /**
      * Inicia uma venda adicionando o cliente na sessão
      * para posteriores inserçoes no banco
