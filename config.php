@@ -2,7 +2,7 @@
 return [
     "app_url" => "localhost:8080",
     "database" => [
-        "name" => "gestao_produto",
+        "name" => "manager_system",
         "username" => "root",
         "password" => "123456",
         "connection" => "mysql:host=127.0.0.1",

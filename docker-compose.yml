@@ -1,0 +1,21 @@
+version: "2"
+services:
+    php:
+        image: php:7.1-fpm
+        container_name: ms-php
+        ports:
+            - "8080:80"
+        volumes:
+            - ./public:/public
+        links:
+            - mysql
+    mysql:
+        image: mysql
+        container_name: ms-mysql
+        volumes:
+            - /var/lib/mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=123
+            - MYSQL_DATABASE=manager_system
+            - MYSQL_USER=manager_system
+            - MYSQL_PASSWORD=manager_system
